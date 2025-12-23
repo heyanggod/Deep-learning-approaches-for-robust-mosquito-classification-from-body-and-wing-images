@@ -32,7 +32,7 @@
 
 （ii）提出针对该数据集优化的轻量型混合模型（CNN + MobileNetV2）。
 
-## 引言（解读）
+## 1.引言（解读）
 引言遵循“背景→问题→现有方案局限→研究目标”的逻辑展开：
 
 1. 以蚊媒疾病的公共卫生威胁切入，用 WHO 权威数据（登革热影响范围、死亡人数）强化研究必要性，同时提及环境变化对蚊子扩散的推动作用，说明分类监测的紧迫性；
@@ -87,7 +87,7 @@
 本研究旨在填补这些空白。通过使用多种深度学习模型（包括新型混合架构 CNN-MobileNetV2）系统对比躯体和翅膀图像的分类性能，研究证明，翅膀图像能产生更优的分类结果，且混合模型可在不牺牲效率的前提下显著提升性能，为自动化媒介监测系统提供了实用且可扩展的方法 —— 尤其是在计算资源有限的野外应用场景中。
 
 
-## 解读
+## 2.相关工作（解读）
 相关工作部分通过“表格梳理 + 文献评述”的方式，清晰呈现领域研究现状：
 
 1. 表1直观展示蚊子分类与疾病防控的关联，强化“准确分类”的实际意义；表2系统梳理近5年关键研究，从方法、数据集、性能三个维度对比，便于读者快速定位本研究的位置；
@@ -184,7 +184,7 @@ EfficientNet 在平衡高准确率和低计算成本，核心创新是“复合�
 
 图3. 研究中分析的蚊子物种翅膀图像：埃及伊蚊、白纹伊蚊、朝鲜伊蚊和日本伊蚊（来源：[15]）
 
-## 解读
+## 3. 材料与方法（解读）
 本部分是研究的“技术核心”，体现实验设计的严谨性和针对性：
 
 1. 数据集选择：采用公开标准化数据集，样本分布均衡（避免类别不平衡），涵盖野外和实验室样本（增强适用性），明确区分躯体和翅膀图像（契合研究目标），为实验结果的可靠性和可比性奠定基础；
@@ -323,3 +323,148 @@ EfficientNet 在平衡高准确率和低计算成本，核心创新是“复合�
 图14b. 所有六种模型在翅膀图像测试数据集上的ROC曲线，图例显示各模型的AUC值，MobileNetV2（AUC=0.99）表现接近完美
 
 ### 4.4 关键性能指标汇总
+
+表4a和表4b汇总了所有模型在躯体和翅膀图像上的关键性能指标，表5对比了本研究与Nolte等人[15]的基准结果。
+
+
+表4a 各模型在躯体图像上的性能指标（详细）
+| 模型                 | 准确率（%） | 灵敏度（%） | 精确率（%） | F1 分数（%） | Kappa 值  |
+|----------------------|-------------|-------------|-------------|--------------|-----------|
+| ResNet50             | 51.3        | 51.3        | 51.3        | 51.2         | 0.3500    |
+| MobileNetV2          | 77.5        | 77.5        | 78.3        | 77.4         | 0.7000    |
+| EfficientNetV2       | 33.8        | 33.8        | 52.4        | 28.5         | 0.1167    |
+| DenseNet121          | 77.1        | 77.1        | 78.4        | 76.9         | 0.6944    |
+| CNN                  | 69.2        | 69.2        | 73.8        | 69.8         | 0.5889    |
+| 混合模型（CNN + MobileNet） | 79.6        | 79.6        | 80.1        | 79.4         | 0.7278    |
+
+
+表4b 各模型在翅膀图像上的性能指标（详细）
+| 模型                 | 准确率（%） | 灵敏度（%） | 精确率（%） | F1 分数（%） | Kappa 值  |
+|----------------------|-------------|-------------|-------------|--------------|-----------|
+| ResNet50             | 60.4        | 60.4        | 63.3        | 60.4         | 0.4722    |
+| MobileNetV2          | 93.3        | 93.3        | 93.5        | 93.3         | 0.9111    |
+| EfficientNetV2       | 25.0        | 25.0        | 6.3         | 10.0         | 0.0000    |
+| DenseNet121          | 87.1        | 87.1        | 87.2        | 87.0         | 0.8278    |
+| CNN                  | 80.4        | 80.4        | 84.8        | 80.8         | 0.7389    |
+| 混合模型（CNN + MobileNet） | 88.8        | 88.8        | 91.1        | 89.1         | 0.8500    |
+
+
+表5 本研究与Nolte等人[15]的性能对比
+| 作者       | 方法         | 数据集                | 翅膀图像准确率 | 躯体图像准确率 |
+|------------|--------------|-----------------------|----------------|----------------|
+| Nolte等人[15] | CNN          | 796张图像（4种伊蚊）| 87.6%          | 78.9%          |
+| 本研究     | MobileNetV2  | 796张图像（4种）| 93.3%          | 77.5%          |
+| 本研究     | 混合模型     | 796张图像（4种伊蚊）| 88.8%          | 79.6%          |
+
+
+### 4.5 结果核心结论
+
+深入分析结果可得出以下关键结论：
+1. 图像类型决定模型选择：躯体图像分类的最优解是混合模型（79.6%准确率），翅膀图像分类的最优解是MobileNetV2（93.3%准确率）；
+2. 翅膀图像区分能力更强：所有模型在翅膀图像上的性能均优于躯体图像，因翅膀的物种特异性脉序和纹理更稳定；
+3. 轻量型模型优势显著：MobileNetV2和DenseNet121在性能和计算效率上实现平衡，适配野外资源有限场景；
+4. 深层模型适配性差：ResNet50和EfficientNetV2因数据集规模小而出现过拟合或未收敛，证明“模型复杂度需与数据量匹配”；
+5. 本研究性能优于基准：MobileNetV2的翅膀图像准确率（93.3%）和混合模型的躯体图像准确率（79.6%）均超越Nolte等人的CNN模型。
+
+
+## 4. 实验结果（解读）
+
+实验结果部分通过“定量指标+定性分析”结合的方式，全面验证研究假设，核心发现清晰明确：
+1. 图像类型的影响：**翅膀图像的分类性能普遍优于躯体图像**（所有模型的翅膀图像准确率均高于躯体图像），原因是翅膀的物种特异性脉序和纹理更稳定、区分度更高，尤其适用于形态相似的伊蚊物种，这一结果与前人研究一致性且性能更优；
+2. 模型性能差异：
+   - 轻量型模型（MobileNetV2、DenseNet121）表现突出：MobileNetV2在翅膀图像上达到93.3%准确率（AUC=0.99），DenseNet121在两类图像上均保持稳定高准确率，证明轻量型架构在“性能与计算效率”上的平衡优势，适配野外应用；
+   - 混合模型在躯体图像上最优（79.6%准确率，AUC=0.96），融合两种模型的特征优势，解决了躯体图像特征区分度不足的问题，验证了混合架构的创新价值；
+   - 深层模型（ResNet50）表现不佳：因数据集规模较小，深层模型出现过拟合，泛化能力差；EfficientNetV2彻底失败（翅膀图像AUC=0.35），说明模型复杂度需与数据集规模、任务特性匹配，并非“越先进越好”；
+   - 自定义CNN表现稳健：虽非最优，但在两类图像上均达到较高准确率（翅膀80.4%、躯体69.2%），证明针对特定任务的简单架构的实用价值；
+3. 与前人研究对比：本研究的MobileNetV2（翅膀93.3%）和混合模型（躯体79.6%）均优于Nolte等人的CNN模型（翅膀87.6%、躯体78.9%），凸显模型架构优化的有效性；
+4. 核心结论：不同图像类型需匹配不同模型——躯体图像适配混合模型，翅膀图像适配MobileNetV2，为实际应用提供了明确的技术选型依据。
+
+
+## 5. 讨论（翻译）
+
+本研究将深度学习和混合方法应用于蚊子分类，结果凸显图像类型（躯体vs翅膀）对模型整体性能和可靠性的显著影响。研究评估了CNN、ResNet50、MobileNetV2、EfficientNetV2、DenseNet121和提出的混合模型的分类性能，发现MobileNetV2模型在翅膀图像上实现最高分类准确率，混合模型在躯体图像上表现最佳。值得注意的是，所有模型在翅膀图像上的分类结果均优于躯体图像，凸显翅膀形态的区分能力——这与文献[17]的先前结论一致。
+
+与早期研究相比，本研究结果具有竞争力：Nolte等人[15]使用CNN模型对相似蚊子物种进行分类，翅膀图像准确率87.6%，躯体图像78.9%，而本研究的MobileNetV2模型在翅膀图像上显著超越该水平（表5）。类似地，Araújo等人[2]采用AlexNet实现94%准确率，本研究的MobileNetV2模型表现接近；Johnson等人[9]提出的EggCountRFS模型在基于EfficientNet的准确率表现出高准确率，但该研究聚焦卵分类而非成蚊分类。近期采用Faster R-CNN[21]、CNN+RIFS[22]、轻基EfficientNetV2等架构（结合知识蒸馏和残差跳跃块）[13]等复杂模型的研究均取得了良好性能。本研究结果证实，MobileNetV2等轻量型架构可在降低计算成本的同时显著提升分类性能，与Montalbo[13]提出的“效率优先”设计原则一致。
+
+与Minakshi等人[12]的大规模数据集研究（25667张蚊子图像，Inception-ResNet V2架构，准确率80%）相比，本研究的模型尽管数据集规模相对较小，但泛化能力更优，表明精心的模型设计和混合策略可有效弥补数据量不足的缺陷。Adhane等人[1]讨论的迁移学习方法和Swin Transformer[24]、MobileNetV1[10]等基于视觉Transformer的架构均为蚊子分类任务设定了新标准，实现了近完美结果。尽管本研究采用Transformer-based模型，但MobileNetV2和混合模型仍取得了高性能，表明未来通过整合此类先进技术有望进一步提升性能。
+
+本研究的重要贡献之一是对躯体和翅膀图像的系统对比，清晰证实翅膀图像对物种分类任务更具信息价值。这一发现凸显翅膀形态在蚊子物种区分中的重要性，为未来更准确的蚊子图像监测提供了参考。
+
+本研究的一项关键发现是ResNet50（图8）和EfficientNetV2（图10）等深层、参数过多的模型的明显失败。这些复杂架构在训练于相对小型、专用数据集时可能出现过拟合，尽管它们在ImageNet等大型数据集上表现强劲，但在有限的蚊子图像中可能学习到虚假特征。相比之下，轻量型MobileNetV2（图9）和自定义CNN（图4）的架构更适配数据量，能够有效泛化。
+
+尽管如此，本研究仍存在局限性：数据集规模相对较小，成像条件的变异可能对躯体图像质量产生显著影响，进而影响部分模型的性能。未来研究应聚焦于扩大数据集、实现先进数据增强技术、探索Transformer-based模型，以进一步提升分类性能。
+
+本研究同样承认，所用数据集虽标准化，但仅包含受控光照下的完整样本，因此本研究报告的高准确率代表理想条件下的上限。未来研究必须在真实野外采集的（可能受损或遮挡的）样本上验证这些模型，以评估其实际应用就绪度。
+
+总体而言，本研究证明深度学习模型（尤其是轻量型架构和混合方法）可实现高准确率的蚊子物种分类，为开发可扩展的自动媒介监测系统提供了潜力。
+
+
+## 5. 讨论（解读）
+
+讨论部分是对实验结果的深度延伸，遵循“结果总结→横向对比→贡献提炼→局限性分析→未来方向”的逻辑：
+1. 结果总结：重申核心发现——图像类型影响模型选择（混合模型适配躯体图像，MobileNetV2适配翅膀图像），翅膀图像区分度更高，轻量型模型优势显著；
+2. 横向对比：将本研究结果与近5年相关研究对比，凸显性能优势（如MobileNetV2翅膀图像准确率93.3%优于Nolte等人的87.6%），同时强调本研究的独特价值——针对形态相似伊蚊，系统对比两种图像类型，提升模型的适用场景；
+3. 贡献提炼：明确两大核心贡献——①证实翅膀图像的高信息价值，为监测技术选型提供依据；②验证轻量型和混合模型的有效性，解决“大规模部署”的计算成本问题；
+4. 深度分析：解释深层模型（ResNet50、EfficientNetV2）失败的本质原因——数据集规模与模型复杂度不匹配，导致过拟合，为后续模型选择提供理论指导；
+5. 局限性与未来方向：客观指出数据集规模小、样本场景单一（受控环境）等不足，提出具体改进方向（扩大数据集、先进数据增强、Transformer模型、野外样本验证），体现研究的严谨性和前瞻性。
+
+
+## 6. 结论（翻译）
+本研究通过深度学习方法分析了蚊子躯体形态和翅膀形态对物种鉴定的具体贡献。结果表明，模型的成功在很大程度上取决于可用视觉数据——躯体和翅膀图像需要独特的架构方法。CNN与MobileNetV2架构结合在躯体图像上实现了最高鉴定准确率，而MobileNetV2单独在翅膀图像上表现最佳（因翅膀形态与躯体结构存在本质差异）。
+
+研究结果对媒介监测工作具有重要意义：实际部署中，若能获取完整躯体图像，可采用CNN-MobileNetV2混合系统（本研究中表现出强劲准确率）；通过翅膀脉序识别精细形态结构的场景，MobileNetV2轻量型模型更为适配——其具备在移动设备野外场景中快速运行的潜力。然而，如局限性部分所述，翅膀样本的制备时间以及标准化成像的需求，仍是在全球各地部署的实际挑战。
+
+本研究的发现存在一定局限性，影响其普适性：研究数据集主要包含统一物种样本和标准化成像条件，而实际媒介监测系统面临多样化场景；模型在受控测试环境中运行，其在野外样本上的性能尚未经过真实场景验证；翅膀识别所需的高质量标准化图像，在资源有限地区部署时面临障碍。
+
+未来研究应直接解决这些现有局限性：增加更多物种样本、整合多样化成像设备和野外数据收集，以提升系统稳健性；在不同环境预测条件下样本质量特征对直接进行野外测试，评估其实际部署潜力；将昆虫学专业知识融入解读过程，使AI预测与分类学关键特征直接相关；通过多模态方法整合躯体和翅膀图像分析、栖息地数据、环境条件及地理分布信息，开发更完善的全球蚊子监测工具。
+
+未来研究需要将技术系统开发与生物学需求、实际应用需求相结合，打造可部署的AI系统，以改进媒介控制和疾病预防策略。
+
+
+## 6. 结论（解读）
+
+结论部分对研究进行了高度概括与升华，核心包含三层逻辑：
+1. 核心发现总结：明确“两种图像决定模型差异”的核心结论——混合模型适配躯体图像，MobileNetV2适配翅膀图像，体现翅膀形态的高分类指导价值；
+2. 实际应用价值：将研究结果落地到媒介监测场景，给出具体技术选型建议（混合模型用于躯体图像，MobileNetV2用于翅膀图像），同时客观指出部署挑战（翅膀样本制备、标准化成像）；
+3. 局限性与未来展望：再次强调数据集和测试环境的局限性，提出更具针对性的未来研究方向（多模态融合、昆虫学知识整合、野外验证），最终目标是打造“技术-生物-应用”三位一体的可部署AI系统，服务于全球蚊媒疾病防控。
+
+
+## 作者贡献声明
+Talaa Ormnekaya：方法学、验证、可视化、初稿撰写、审阅与编辑。
+Me'ta Ya'gci'：数据整理、方法学、验证、可视化、初稿撰写、审阅与编辑。
+
+
+## 利益冲突声明
+作者声明无可能影响本研究结果的财务利益冲突或个人关系。
+
+
+
+## 数据可用性
+本研究使用和/或分析的数据集可通过联系通讯作者合理获取。
+
+
+## 参考文献
+1. G. Adhane, M.M. Dehshibi, D. Masip, A deep convolutional neural network for classification of Aedes albopictus mosquitoes, IEEE Access 9 (2021) 72681–72690, [https://doi.org/10.1109/ACCESS.2021.3079700](https://doi.org/10.1109/ACCESS.2021.3079700).
+2. T.O. Araújo, V.L. de Miranda, R. Gurgel-Gonçalves, AI-driven convolutional neural networks for accurate identification of yellow fever vectors, Parasit. Vectors 17 (2024) 329, [https://doi.org/10.1186/s13071-024-06406-2](https://doi.org/10.1186/s13071-024-06406-2).
+3. R. Charoenpanyaku, V. Kittichai, S. Eiamsamang, et al., Enhancing mosquito classification through self-supervised learning, Sci. Rep. 14 (2024) 27123, [https://doi.org/10.1038/s41598-024-72826-2](https://doi.org/10.1038/s41598-024-72826-2).
+4. W.M. de Souza, S.C. Weaver, Effects of climate change and human activities on vector-borne diseases, Nat. Rev. Microbiol. 22 (2024) 476–491, [https://doi.org/10.1038/s41579-024-01026-0](https://doi.org/10.1038/s41579-024-01026-0).
+5. K.A. Gupta, V.N. Ikonomidou, M. Glancey, R. Faiman, S. Talafta, T. Ford, T. Jenkins, A. Goodwin, Mosquito species identification accuracy of early deployed algorithms in IDx, a vector identification tool, Acta Trop. 260 (2024) 107392, [https://doi.org/10.1016/j.actatropica.2024.107392](https://doi.org/10.1016/j.actatropica.2024.107392).
+6. K. He, X. Zhang, S. Ren, J. Sun, Deep residual learning for image recognition (arXiv:1512.03385), ArXiv (2015), [https://doi.org/10.1109/CVPR.2016.90](https://doi.org/10.1109/CVPR.2016.90).
+7. A.G. Howard, M. Zhu, B. Chen, D. Kalenichenko, W. Wang, W. David, MobileNets: efficient convolutional neural networks for mobile vision applications, ArXiv (2017), [https://doi.org/10.48550/arXiv.1704.04861](https://doi.org/10.48550/arXiv.1704.04861).
+8. G. Huang, Z. Liu, L. Van Der Maaten, K.Q. Weinberger, Densely connected convolutional networks, in: Proceedings of the IEEE conference on computer vision and pattern recognition, 2017, pp. 4700–4708, [https://doi.org/10.1109/CVPR.2017.243](https://doi.org/10.1109/CVPR.2017.243).
+9. L. Johnson, R. Patel, K. Wong, EggCountAI: a convolutional neural network-based software for automatic counting of Aedes aegypti mosquito eggs. Parasites & Vectors, Springer, 2023, [https://doi.org/10.1186/s13071-023-05688-2](https://doi.org/10.1186/s13071-023-05688-2).
+10. A.A.J. Karim, M.Z. Mahmud, R. Khan, Advanced vision transformers and open-set learning for robust mosquito classification: a novel approach to entomological studies, PLoS Comput. Biol. 20 (12) (2024) e1012654, [https://doi.org/10.1371/journal.pcbi.1012654](https://doi.org/10.1371/journal.pcbi.1012654).
+11. Y. LeCun, Y. Bengio, G. Hinton, Deep learning, Nature 521 (7553) (2015) 436–444, [https://doi.org/10.1038/nature14539](https://doi.org/10.1038/nature14539).
+12. M. Minakshi, P. Bharti, W.B. McClinton III, J. Mirzakhalov, R.M. Carney, S. Chellappan, Automating the surveillance of mosquito vectors from trapped specimens using computer vision techniques, ArXiv (2020), [https://doi.org/10.48550/arXiv.2005.12188](https://doi.org/10.48550/arXiv.2005.12188).
+13. E.J.P. Montalbo, Automating mosquito taxonomy by compressing and enhancing a feature fused EfficientNet with knowledge distillation and a novel residual skip block, MethodsX 10 (2023) 102072, [https://doi.org/10.1016/j.mex.2023.102072](https://doi.org/10.1016/j.mex.2023.102072).
+14. A. Nebbak, L. Almeras, P. Parola, I. Bitam, Mosquito vectors (Diptera: culicidae) and mosquito-borne diseases in North Africa, Insects 13 (10) (2022) 962, [https://doi.org/10.3390/insects13100962](https://doi.org/10.3390/insects13100962).
+15. K. Nolte, F.G. Sauer, J. Baumbach, P. Kollmannsberger, C. Lins, R. Lühken, Robust mosquito species identification from diverse body and wing images using deep learning, Parasit. Vectors 17 (1) (2024) 372, [https://doi.org/10.5061/dryad.b8gth7mx](https://doi.org/10.5061/dryad.b8gth7mx).
+16. F.G. Sauer, L. Jaworski, L. Erdbeer, et al., Geometric morphometric wing analysis represents a robust tool to identify female mosquitoes (Diptera: culicidae) in Germany, Sci. Rep. 10 (2020) 17613, [https://doi.org/10.1038/s41598-020-72873-z](https://doi.org/10.1038/s41598-020-72873-z).
+17. F.G. Sauer, M. Werny, K. Nolte, et al., A convolutional neural network to identify mosquito species (Diptera: culicidae) of the genus Aedes by wing images, Sci. Rep. 14 (2024) 3094, [https://doi.org/10.1038/s41598-024-53631-x](https://doi.org/10.1038/s41598-024-53631-x).
+18. D. Singh, Y.S. Taspinar, R. Kursun, I. Cinar, M. Koklu, I.A. Ozkan, H.-N. Lee, Classification and analysis of pistachio species with pre-trained deep learning models, Electronics. (Basel) 11 (6) (2022) 981, [https://doi.org/10.3390/electronics11070981](https://doi.org/10.3390/electronics11070981).
+19. M. Tan, Q.V. Le, A. Paul, EfficientNet: rethinking model scaling for convolutional neural networks (arXiv:1905.11946), ArXiv. (2019), [https://doi.org/10.48550/arXiv.1905.11946](https://doi.org/10.48550/arXiv.1905.11946).
+20. Y.S. Taspinar, I. Cinar, M. Koklu, Classification by a stacking model using CNN features for COVID-19 infection diagnosis, J. Xray. Sci. Technol. 30 (1) (2021) 73–88, [https://doi.org/10.3233/XST-211031](https://doi.org/10.3233/XST-211031).
+21. M. Wang, Y. Zhou, S. Yao, J. Wu, M. Zhu, L. Dong, D. Wang, Enhancing vector control: AI-based identification and counting of Aedes albopictus (Diptera: culicidae) mosquito eggs, Parasit. Vectors 17 (1) (2024) 511, [https://doi.org/10.1186/s13071-024-06587-w](https://doi.org/10.1186/s13071-024-06587-w).
+22. S. Wang, D. Patel, Vector mosquito image classification using novel RIFS feature extraction, Pattern Recognition Letters, Elsevier, 2023, [https://doi.org/10.1016/j.patrec.2023.07.012](https://doi.org/10.1016/j.patrec.2023.07.012).
+23. World Health Organization (WHO), Global Report On Neglected Tropical Diseases 2024, World Health Organization, 2024. [https://www.who.int/publications/i/item/9789240091535](https://www.who.int/publications/i/item/9789240091535).
+24. Dz. Zhao, Xk. Wang, T. Zhao, et al., A Swin Transformer-based model for mosquito species identification, Sci. Rep. 12 (2022) 18664, [https://doi.org/10.1038/s41598-022-21017-6](https://doi.org/10.1038/s41598-022-21017-6).
