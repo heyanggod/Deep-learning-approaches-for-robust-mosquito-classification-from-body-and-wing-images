@@ -1,6 +1,26 @@
 ## 目录
+- [Abstract—摘要](#abstract—摘要)
+- [一、Introduction—介绍](#一introduction—介绍)
+- [二、Related Work—相关工作](#二related-work—相关工作)
+- [三、Material and method—材料与方法](#三material-and-method—材料与方法)
+  - [3.1 Dataset—数据集](#31-dataset—数据集)
+  - [3.2 Preprocessing—预处理](#32-preprocessing—预处理)
+  - [3.3 Deep learning models—深度学习模型](#33-deep-learning-models—深度学习模型)
+- [四、Experimental results—实验结果](#四experimental-results—实验结果)
+  - [4.1 各模型分类性能细节](#41-各模型分类性能细节)
+  - [4.2 学习曲线分析](#42-学习曲线分析)
+  - [4.3 ROC 曲线与 AUC 分析](#43-roc-曲线与-auc-分析)
+  - [4.4 关键性能指标汇总](#44-关键性能指标汇总)
+  - [4.5 结果核心结论](#45-结果核心结论)
+- [五、Discussion—讨论](#五discussion—讨论)
+- [六、Conclusion—结论](#六conclusion—结论)
+- [CRedIT authorship contribution statement—作者贡献声明](#credit-authorship-contribution-statement—作者贡献声明)
+- [Declaration of competing interest—利益冲突声明](#declaration-of-competing-interest—利益冲突声明)
+- [Data availability—数据可用性](#data-availability—数据可用性)
+- [References—参考文献](#references—参考文献)
 
-## 摘要（翻译）
+
+# Abstract—摘要
 蚊媒疾病在全球范围内对人类健康构成重大威胁。传统的蚊子物种鉴定形态学和分子生物学方法通常需要专业知识或昂贵的实验室设备。然而，基于深度学习方法（尤其是卷积神经网络，CNNs）的图像式蚊子物种鉴定正逐渐成为一种潜在的替代方案。本研究评估了深度学习方法（特别是卷积神经网络）在蚊子物种分类中的有效性，并对比了躯体图像和翅膀图像的分类性能。研究使用了 3184 个样本，涉及四种形态相似的伊蚊物种（埃及伊蚊、白纹伊蚊、朝鲜伊蚊和日本伊蚊）。数据集按 70% 训练集、15% 验证集和 15% 测试集的比例划分。研究中使用的深度学习模型包括 ResNet50、MobileNetV2、EfficientNetV2、DenseNet、CNN 以及混合模型（CNN + MobileNetV2）。独立的 MobileNetV2 模型在翅膀图像分类中取得了最高准确率（93.3%），而本文提出的混合模型（CNN + MobileNetV2）在躯体图像分类中表现最佳（79.6%）。这些结果不仅显示出高预测准确率，还在各项评估指标中体现出较强的类别区分能力和稳健性。虽然这些发现证明了两种分类方法的潜力，但也凸显了在开发实用且易获取的分类系统时面临的一些实施挑战。研究结果表明，轻量型和混合深度学习架构可作为开发规模化蚊子媒介监测系统的可靠替代方案。
 
 
