@@ -10,18 +10,22 @@
 )
   - [3.3 Deep learning models—深度学习模型](#33-deep-learning-models%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B
 )
-- [四、Experimental results—实验结果](#四experimental-results—实验结果)
+- [四、Experimental results—实验结果](#%E5%9B%9Bexperimental-results%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C
+)
   - [4.1 各模型分类性能细节](#41-各模型分类性能细节)
   - [4.2 学习曲线分析](#42-学习曲线分析)
   - [4.3 ROC 曲线与 AUC 分析](#43-roc-曲线与-auc-分析)
   - [4.4 关键性能指标汇总](#44-关键性能指标汇总)
   - [4.5 结果核心结论](#45-结果核心结论)
-- [五、Discussion—讨论](#五discussion—讨论)
-- [六、Conclusion—结论](#六conclusion—结论)
-- [CRedIT authorship contribution statement—作者贡献声明](#credit-authorship-contribution-statement—作者贡献声明)
-- [Declaration of competing interest—利益冲突声明](#declaration-of-competing-interest—利益冲突声明)
-- [Data availability—数据可用性](#data-availability—数据可用性)
-- [References—参考文献](#references—参考文献)
+- [五、Discussion—讨论](#%E4%BA%94discussion%E8%AE%A8%E8%AE%BA
+)
+- [六、Conclusion—结论](#%E5%85%ADconclusion%E7%BB%93%E8%AE%BA)
+- [CRedIT authorship contribution statement—作者贡献声明](#E4%BD%9C%E8%80%85%E8%B4%A1%E7%8C%AE%E5%A3%B0%E6%98%8E
+)
+- [Declaration of competing interest—利益冲突声明](#%E5%88%A9%E7%9B%8A%E5%86%B2%E7%AA%81%E5%A3%B0%E6%98%8E
+)
+- [Data availability—数据可用性](#%E6%95%B0%E6%8D%AE%E5%8F%AF%E7%94%A8%E6%80%A7)
+- [References—参考文献](#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE)
 
 
 # Abstract—摘要
